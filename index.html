@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Fusion Tables styling</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin-top: 10px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="geo_json.js"></script>
+    <script>
+      var map, layer;
+
+      function initialize() {
+
+        var boston = new google.maps.LatLng(42.3581, -71.0636);
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), {
+          center: boston,
+          zoom: 13
+        });
+
+        var geojson = {
+          "type": "Polygon",
+          "coordinates": [
+              [
+                  [-71.21809959411621, 42.36697874190961],
+                  [-71.2119197845459, 42.364505489686884],
+                  [-71.20505332946777, 42.36545675206481],
+                  [-71.19767189025879, 42.367295818486056],
+                  [-71.18505477905273, 42.3643786536149],
+                  [-71.180419921875, 42.3746515457839],
+                  [-71.19827270507812, 42.37858270194822],
+                  [-71.21183395385742, 42.38124560340257],
+                  [-71.2180995941162, 42.36697874190961]
+              ]
+          ]
+        };
+
+        var googleOptions = {
+            strokeColor: "#FF7800",
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            fillColor: "#46461F",
+            fillOpacity: 0.25
+        };
+
+        googleVector = new GeoJSON(geojson, googleOptions);
+
+        googleVector.setMap(map);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
